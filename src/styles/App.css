@@ -39,3 +39,20 @@
 .read-the-docs {
   color: #888;
 }
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1.5rem;
+  border: 1px solid #fff;
+  border-radius: 25px;
+  width: 50vw;
+}
+
+fieldset {
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
