@@ -1,5 +1,10 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../utils/UserProvider";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Alert from "@mui/material/Alert";
+import LoginIcon from "@mui/icons-material/Login";
+import Box from "@mui/material/Box";
 
 const LoginForm = () => {
   const { login, logout, isLogged, message } = useContext(UserContext);
@@ -13,39 +18,39 @@ const LoginForm = () => {
   };
 
   return (
-    <form className="login-form" onSubmit={handleFormSubmit} method="post">
-      <fieldset>
-        <legend>
-          Username: <strong>admin</strong> Password: <strong>admin</strong>
-        </legend>
-        <label htmlFor="username">
-          Username<span>*</span>
-        </label>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          placeholder="Inserisci username"
-          onChange={(e) => setUser(e.target.value)}
-          required
-          aria-required="true"
-        />
-        <label htmlFor="password">
-          Password<span>*</span>
-        </label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Inserisci la password"
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          aria-required="true"
-        />
-      </fieldset>
-      {message && <div style={{ color: "red" }}>{message}</div>}
-      <input type="submit" value="Login" />
-    </form>
+    <Box
+      component="form"
+      className="login-form"
+      onSubmit={handleFormSubmit}
+      method="post"
+    >
+      <Alert severity="info">Username: admin - Password: admin</Alert>
+
+      <TextField
+        id="username"
+        name="username"
+        label="Username"
+        type="text"
+        placeholder="Inserisci il tuo username"
+        onChange={(e) => setUser(e.target.value)}
+        required
+      />
+
+      <TextField
+        id="password"
+        name="password"
+        label="Password"
+        type="password"
+        autoComplete="current-password"
+        placeholder="Inserisci la password"
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+      {message && <Alert severity="error">{message}</Alert>}
+      <Button variant="contained" type="submit" endIcon={<LoginIcon />}>
+        LOGIN
+      </Button>
+    </Box>
   );
 };
 

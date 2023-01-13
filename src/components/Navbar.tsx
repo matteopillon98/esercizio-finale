@@ -1,17 +1,18 @@
 import React, { useContext } from "react";
 import { UserContext } from "../utils/UserProvider";
-import Button from "./Button";
 import { NavLink } from "react-router-dom";
+import Logout from "./Logout";
 
 const Navbar = () => {
-  const { logout } = useContext(UserContext);
+  const { isLogged } = useContext(UserContext);
+
   return (
     <nav>
       <ul>
         <li>
           <NavLink
             className={({ isActive }) => (isActive ? "active" : "")}
-            to="/home"
+            to="/"
           >
             HOME
           </NavLink>
@@ -33,9 +34,7 @@ const Navbar = () => {
           </NavLink>
         </li>
       </ul>
-      <Button className="bnt-logout" onClick={logout}>
-        Logout
-      </Button>
+      {isLogged && <Logout />}
     </nav>
   );
 };
