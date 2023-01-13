@@ -52,7 +52,8 @@ footer {
 nav {
   display: flex;
   flex-direction: row;
-  margin: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid rgb(130, 130, 130);
 }
 
 nav ul {
@@ -62,10 +63,28 @@ nav ul {
   justify-content: space-around;
 }
 
+nav ul li {
+  list-style-type: none;
+}
+
 nav h2 {
   text-align: center;
 }
 
-.bnt.logout {
+.btn-logout {
   color: #fff;
+}
+
+.active-link {
+  color: #646cff;
+  padding: 0.5rem;
+  border-bottom: 2px solid #bec1ff;
+}
+
+.user-not-logged {
+  text-align: center;
+}
+
+.error-404 {
+  text-align: center;
 }

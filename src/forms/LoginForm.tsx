@@ -7,14 +7,6 @@ const LoginForm = () => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
 
-  if (isLogged) {
-    return (
-      <div className="user-logged">
-        <h2>Hai già effettuato l'accesso</h2>
-      </div>
-    );
-  }
-
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     login(user, password);

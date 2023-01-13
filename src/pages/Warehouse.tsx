@@ -68,7 +68,6 @@ const Warehouse = () => {
       },
     ],
   };
-
   return (
     <div className="user-logged">
       <h2>Bentornato nel nostro inventario</h2>
