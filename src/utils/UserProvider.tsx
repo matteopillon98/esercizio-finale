@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 interface UserContextProps {
   login: (username: string, password: string) => void;
@@ -22,10 +22,13 @@ const UserProvider = ({ children }: UserProviderProps) => {
   const [isLogged, setIsLogged] = useState(false);
   const [message, setmessage] = useState("");
 
+  useEffect(() => {
+    localStorage.getItem("username") ? setIsLogged(true) : setIsLogged(false);
+  }, []);
+
   const login = (username: string, password: string) => {
-    // TO DO
-    // SALVARE NEL LOCAL STORAGE
     if (username === "admin" && password === "admin") {
+      localStorage.setItem("username", username);
       setIsLogged(true);
     } else {
       setmessage("Credenziali fornite errate, riprova");
@@ -33,8 +36,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
   };
 
   const logout = () => {
-    // TO DO
-    // ELIMINARE I DATI DAL LOCAL STORAGE
+    localStorage.removeItem("username");
     setIsLogged(false);
   };
 
