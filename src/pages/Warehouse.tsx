@@ -46,14 +46,12 @@ const backgroundColor = [
 
 const Warehouse = () => {
   const [warehouse, setWarehouse] = useState([]);
-  //const [labels, setLabels] = useState([]);
 
   useEffect(() => {
     fetch("https://petstore.swagger.io/v2/store/inventory")
       .then((response) => response.json())
       .then((data) => {
         setWarehouse(data);
-        //Object.keys(data).map((key, i) => setLabels(key));
       })
       .catch((err) => console.error(err));
   }, []);
