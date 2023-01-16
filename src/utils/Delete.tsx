@@ -12,13 +12,14 @@ import { UserContext } from "./UserProvider";
 
 interface Props {
   id: string;
+  handleDelete: (id: string) => {};
 }
 
 const Delete = (props: Props) => {
   const { setMessage } = useContext(UserContext);
 
   const [open, setOpen] = useState(false);
-  const { id } = props;
+  const { id, handleDelete } = props;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -52,6 +53,7 @@ const Delete = (props: Props) => {
         );
       });
     handleClose();
+    handleDelete(id);
   };
 
   return (

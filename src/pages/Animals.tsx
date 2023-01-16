@@ -9,8 +9,8 @@ import { useContext } from "react";
 const baseURL = "https://petstore.swagger.io/v2/pet/findByStatus?status=sold";
 
 const Animals = () => {
-  const [animals, setAnimals] = useState([]);
   const { message } = useContext(UserContext);
+  const [animals, setAnimals] = useState([]);
 
   useEffect(() => {
     axios
@@ -27,6 +27,7 @@ const Animals = () => {
     let newAnimals = animals.filter((animal) => animal.id !== id);
     setAnimals(newAnimals);
   };
+
   /*useEffect(() => {
     axios
       .post("https://petstore.swagger.io/v2/pet", {
@@ -64,6 +65,7 @@ const Animals = () => {
                   id={animal.id}
                   key={animal.id + index}
                   name={animal.name}
+                  handleDelete={handleDelete}
                 ></Animal>
               );
             }

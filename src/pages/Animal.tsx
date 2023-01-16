@@ -10,21 +10,21 @@ interface Props {
   id: string;
   key: string;
   name: string;
+  handleDelete: (id: string) => {};
 }
 
 const Animal = (props: Props) => {
-  const { id, name } = props;
+  const { id, name, handleDelete } = props;
 
   return (
     <ListItem
       secondaryAction={
         <>
-          <Edit id={id} /> <Delete id={id} />
+          <Edit id={id} /> <Delete handleDelete={handleDelete} id={id} />
         </>
       }
       sx={{
-        background: "#b3b3b3",
-        border: "1px solid #000",
+        border: "1px solid #FFF",
         padding: "1rem",
         margin: "1rem",
       }}
@@ -34,7 +34,14 @@ const Animal = (props: Props) => {
           <PetsIcon />
         </Avatar>
       </ListItemAvatar>
-      <ListItemText primary={name.toUpperCase()} secondary={`ID: ${id}`} />
+      <ListItemText
+        primary={name.toUpperCase()}
+        secondary={`ID: ${id}`}
+        sx={{
+          margin: "1rem",
+        }}
+        secondaryTypographyProps={{ style: { color: "#FFF" } }}
+      />
     </ListItem>
   );
 };
