@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "../utils/UserProvider";
 import { NavLink } from "react-router-dom";
-import Logout from "./Logout";
+import Logout from "../utils/Logout";
 
 const Navbar = () => {
   const { isLogged } = useContext(UserContext);

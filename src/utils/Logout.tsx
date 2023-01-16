@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useContext } from "react";
-import { UserContext } from "../utils/UserProvider";
+import { UserContext } from "./UserProvider";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const Logout = () => {

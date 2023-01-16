@@ -10,6 +10,8 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
+import axios from "axios";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -37,21 +39,18 @@ export const options = {
 
 const labels = ["available", "sold", "not available", "pending"];
 
-const backgroundColor = [
-  "rgba(0,255, 0, 0.7)",
-  "rgba(255, 0, 0, 0.7)",
-  "rgba(252, 0, 255, 0.7)",
-  "rgba(255, 255, 0, 0.7)",
-];
+const backgroundColor = ["rgba(252, 0, 255, 0.7)"];
+
+const baseURL = "https://petstore.swagger.io/v2/store/inventory";
 
 const Warehouse = () => {
   const [warehouse, setWarehouse] = useState([]);
 
   useEffect(() => {
-    fetch("https://petstore.swagger.io/v2/store/inventory")
-      .then((response) => response.json())
-      .then((data) => {
-        setWarehouse(data);
+    axios
+      .get(baseURL)
+      .then((response) => {
+        setWarehouse(response.data);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -61,7 +60,15 @@ const Warehouse = () => {
     datasets: [
       {
         label: "Animali",
-        data: labels.map((label) => warehouse[label]),
+        data: Object.fromEntries(
+          Object.entries(warehouse).filter(
+            ([key]) =>
+              key === "available" ||
+              key === "sold" ||
+              key === "not available" ||
+              key === "pending"
+          )
+        ),
         backgroundColor: backgroundColor,
       },
     ],

@@ -5,6 +5,7 @@ interface UserContextProps {
   logout: () => void;
   isLogged: boolean;
   message: string;
+  setMessage: (msg: string) => void;
 }
 
 const UserContext = createContext<UserContextProps>({
@@ -12,6 +13,7 @@ const UserContext = createContext<UserContextProps>({
   logout: () => {},
   isLogged: false,
   message: "",
+  setMessage: () => {},
 });
 
 interface UserProviderProps {
@@ -20,7 +22,7 @@ interface UserProviderProps {
 
 const UserProvider = ({ children }: UserProviderProps) => {
   const [isLogged, setIsLogged] = useState(false);
-  const [message, setmessage] = useState("");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     localStorage.getItem("username") ? setIsLogged(true) : setIsLogged(false);
@@ -31,7 +33,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
       localStorage.setItem("username", username);
       setIsLogged(true);
     } else {
-      setmessage("Credenziali fornite errate, riprova");
+      setMessage("Credenziali fornite errate, riprova");
     }
   };
 
@@ -47,6 +49,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
         logout,
         isLogged,
         message,
+        setMessage,
       }}
     >
       {children}
