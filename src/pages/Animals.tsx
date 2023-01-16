@@ -10,11 +10,26 @@ import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 
+interface Animal {
+  id: string;
+  category: {
+    id: number;
+    name: string;
+  };
+  name: string;
+  photoUrls: string[];
+  tags: {
+    id: number;
+    name: string;
+  }[];
+  status: string;
+}
+
 const baseURL = "https://petstore.swagger.io/v2/pet/findByStatus?status=sold";
 
 const Animals = () => {
   const { message, setMessage } = useContext(UserContext);
-  const [animals, setAnimals] = useState([]);
+  const [animals, setAnimals] = useState<Animal[]>([]);
   const [progress, setProgress] = useState(10);
 
   useEffect(() => {
@@ -36,9 +51,9 @@ const Animals = () => {
             setProgress(100);
           });
       }
-    }, 150);
+    }, 100);
     return () => clearInterval(intervalId);
-  }, []);
+  }, [message]);
 
   const handleDelete = (id: string) => {
     let newAnimals = animals.filter((animal) => animal.id !== id);
@@ -69,7 +84,7 @@ const Animals = () => {
     <div className="user-logged">
       <h2>Gestione animali</h2>
 
-      <Add handleAdd={handleAdd} />
+      <Add handleAdd={() => handleAdd} />
 
       {message && (
         <Alert severity="info" onClose={() => setMessage("")}>
@@ -86,14 +101,14 @@ const Animals = () => {
         <List>
           {animals &&
             animals.map((animal, index) => {
-              if (animal.name && animal.id < 10000) {
+              if (animal.name && animal.id < "10000") {
                 return (
                   <Animal
                     id={animal.id}
                     key={animal.id + index}
                     name={animal.name}
-                    handleDelete={handleDelete}
-                    handleEdit={handleEdit}
+                    handleDelete={() => handleDelete}
+                    handleEdit={() => handleEdit}
                   ></Animal>
                 );
               }
