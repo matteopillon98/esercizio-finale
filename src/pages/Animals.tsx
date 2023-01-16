@@ -3,13 +3,14 @@ import axios from "axios";
 import List from "@mui/material/List";
 import Animal from "./Animal";
 import { UserContext } from "../utils/UserProvider";
-import Alert from "@mui/material/Alert";
 import { useContext } from "react";
+import Add from "../utils/Add";
+import Alert from "@mui/material/Alert";
 
 const baseURL = "https://petstore.swagger.io/v2/pet/findByStatus?status=sold";
 
 const Animals = () => {
-  const { message } = useContext(UserContext);
+  const { message, setMessage } = useContext(UserContext);
   const [animals, setAnimals] = useState([]);
 
   useEffect(() => {
@@ -28,6 +29,17 @@ const Animals = () => {
     setAnimals(newAnimals);
   };
 
+  const handleAdd = () => {
+    axios
+      .get(baseURL)
+      .then((response) => {
+        if (response.data) {
+          setAnimals((prevAnimals) => [...prevAnimals, response.data]);
+        }
+      })
+      .catch((error) => alert(error));
+  };
+
   const handleEdit = (id: string, name: string) => {
     setAnimals((prevAnimals) => {
       const newAnimals = prevAnimals.slice();
@@ -38,37 +50,24 @@ const Animals = () => {
   };
 
   /*useEffect(() => {
-    axios
-      .post("https://petstore.swagger.io/v2/pet", {
-        id: Math.floor(Math.random() * (animals.length + 10) + 1),
-        category: {
-          id: 0,
-          name: "string",
-        },
-        name: "pippo",
-        photoUrls: ["string"],
-        tags: [
-          {
-            id: 0,
-            name: "string",
-          },
-        ],
-        status: "sold",
-      })
-      .then((response) => {
-        console.log(response.data);
-      });
+    
   }, []);*/
 
   return (
     <div className="user-logged">
       <h2>Gestione animali</h2>
 
-      {message && <Alert severity="info">{message}</Alert>}
+      <Add handleAdd={handleAdd} />
+
+      {message && (
+        <Alert severity="info" onClose={() => setMessage("")}>
+          {message}
+        </Alert>
+      )}
       <List>
         {animals &&
           animals.map((animal, index) => {
-            if (animal.name && animal.id < 100000) {
+            if (animal.name && animal.id < 10000) {
               return (
                 <Animal
                   id={animal.id}
