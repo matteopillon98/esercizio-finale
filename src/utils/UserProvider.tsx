@@ -40,6 +40,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
 
   const logout = () => {
     localStorage.removeItem("username");
+    setMessage("Devi prima fare l'accesso per utilizzare i nostri servizi");
     setIsLogged(false);
   };
 

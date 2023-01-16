@@ -9,6 +9,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import UndoIcon from "@mui/icons-material/Undo";
 import { UserContext } from "./UserProvider";
 
 interface Props {
@@ -106,10 +108,21 @@ const Edit = (props: Props) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="error">
+          <Button
+            variant="outlined"
+            endIcon={<UndoIcon />}
+            onClick={handleClose}
+            color="error"
+          >
             Annulla
           </Button>
-          <Button onClick={handleEditConfirm}>Conferma Modifica</Button>
+          <Button
+            endIcon={<CheckCircleIcon />}
+            variant="outlined"
+            onClick={handleEditConfirm}
+          >
+            Conferma Modifica
+          </Button>
         </DialogActions>
       </Dialog>
     </>

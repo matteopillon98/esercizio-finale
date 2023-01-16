@@ -7,21 +7,37 @@ import { useContext } from "react";
 import Add from "../utils/Add";
 import Alert from "@mui/material/Alert";
 
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
+
 const baseURL = "https://petstore.swagger.io/v2/pet/findByStatus?status=sold";
 
 const Animals = () => {
   const { message, setMessage } = useContext(UserContext);
   const [animals, setAnimals] = useState([]);
+  const [progress, setProgress] = useState(10);
 
   useEffect(() => {
-    axios
-      .get(baseURL)
-      .then((response) => {
-        if (response.data) {
-          setAnimals(response.data);
-        }
-      })
-      .catch((error) => alert(error));
+    let progressValue = 0;
+    let intervalId = setInterval(() => {
+      setProgress(progressValue);
+      progressValue += 5;
+      if (progressValue > 95) {
+        clearInterval(intervalId);
+        axios
+          .get(baseURL)
+          .then((response) => {
+            if (response.data) {
+              setAnimals(response.data);
+            }
+          })
+          .catch((error) => alert(error))
+          .finally(() => {
+            setProgress(100);
+          });
+      }
+    }, 150);
+    return () => clearInterval(intervalId);
   }, []);
 
   const handleDelete = (id: string) => {
@@ -49,10 +65,6 @@ const Animals = () => {
     });
   };
 
-  /*useEffect(() => {
-    
-  }, []);*/
-
   return (
     <div className="user-logged">
       <h2>Gestione animali</h2>
@@ -64,22 +76,30 @@ const Animals = () => {
           {message}
         </Alert>
       )}
-      <List>
-        {animals &&
-          animals.map((animal, index) => {
-            if (animal.name && animal.id < 10000) {
-              return (
-                <Animal
-                  id={animal.id}
-                  key={animal.id + index}
-                  name={animal.name}
-                  handleDelete={handleDelete}
-                  handleEdit={handleEdit}
-                ></Animal>
-              );
-            }
-          })}
-      </List>
+
+      {progress !== 100 ? (
+        <Box sx={{ width: "100%" }}>
+          <p>Sto caricando i dati relativi agli animali ... </p>
+          <LinearProgress variant="determinate" value={progress} />
+        </Box>
+      ) : (
+        <List>
+          {animals &&
+            animals.map((animal, index) => {
+              if (animal.name && animal.id < 10000) {
+                return (
+                  <Animal
+                    id={animal.id}
+                    key={animal.id + index}
+                    name={animal.name}
+                    handleDelete={handleDelete}
+                    handleEdit={handleEdit}
+                  ></Animal>
+                );
+              }
+            })}
+        </List>
+      )}
     </div>
   );
 };

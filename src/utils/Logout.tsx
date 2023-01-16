@@ -8,6 +8,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useContext } from "react";
 import { UserContext } from "./UserProvider";
 import LogoutIcon from "@mui/icons-material/Logout";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import UndoIcon from "@mui/icons-material/Undo";
 
 const Logout = () => {
   const [open, setOpen] = React.useState(false);
@@ -46,10 +48,20 @@ const Logout = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpen(false)} color="error">
+          <Button
+            variant="outlined"
+            endIcon={<UndoIcon />}
+            onClick={() => setOpen(false)}
+            color="error"
+          >
             Annulla
           </Button>
-          <Button onClick={logout} autoFocus>
+          <Button
+            variant="outlined"
+            endIcon={<CheckCircleIcon />}
+            onClick={logout}
+            autoFocus
+          >
             Effettua Logout
           </Button>
         </DialogActions>

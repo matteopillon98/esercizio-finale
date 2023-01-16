@@ -9,6 +9,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import axios from "axios";
 import { UserContext } from "./UserProvider";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import UndoIcon from "@mui/icons-material/Undo";
 
 interface Props {
   id: string;
@@ -84,10 +86,20 @@ const Delete = (props: Props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpen(false)} color="error">
+          <Button
+            variant="outlined"
+            endIcon={<UndoIcon />}
+            onClick={() => setOpen(false)}
+            color="error"
+          >
             Annulla
           </Button>
-          <Button onClick={handleDeleteConfirm} autoFocus>
+          <Button
+            variant="outlined"
+            endIcon={<CheckCircleIcon />}
+            onClick={handleDeleteConfirm}
+            autoFocus
+          >
             Conferma Elimina
           </Button>
         </DialogActions>

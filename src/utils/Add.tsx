@@ -8,6 +8,8 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import axios from "axios";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import UndoIcon from "@mui/icons-material/Undo";
 import { UserContext } from "./UserProvider";
 
 interface Props {
@@ -104,10 +106,21 @@ const Add = (props: Props) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="error">
+          <Button
+            variant="outlined"
+            endIcon={<UndoIcon />}
+            onClick={handleClose}
+            color="error"
+          >
             Annulla
           </Button>
-          <Button onClick={handleAddConfirm}>Conferma Inserimento</Button>
+          <Button
+            variant="outlined"
+            onClick={handleAddConfirm}
+            endIcon={<CheckCircleIcon />}
+          >
+            Conferma Inserimento
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
