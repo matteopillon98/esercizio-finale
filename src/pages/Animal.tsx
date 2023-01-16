@@ -11,16 +11,18 @@ interface Props {
   key: string;
   name: string;
   handleDelete: (id: string) => {};
+  handleEdit: (id: string, name: string) => {};
 }
 
 const Animal = (props: Props) => {
-  const { id, name, handleDelete } = props;
+  const { id, name, handleDelete, handleEdit } = props;
 
   return (
     <ListItem
       secondaryAction={
         <>
-          <Edit id={id} /> <Delete handleDelete={handleDelete} id={id} />
+          <Edit id={id} name={name} handleEdit={handleEdit} />{" "}
+          <Delete handleDelete={handleDelete} id={id} />
         </>
       }
       sx={{

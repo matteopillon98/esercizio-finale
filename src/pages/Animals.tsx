@@ -28,6 +28,15 @@ const Animals = () => {
     setAnimals(newAnimals);
   };
 
+  const handleEdit = (id: string, name: string) => {
+    setAnimals((prevAnimals) => {
+      const newAnimals = prevAnimals.slice();
+      const animalIndex = newAnimals.findIndex((animal) => animal.id === id);
+      newAnimals[animalIndex] = { ...newAnimals[animalIndex], name: name };
+      return newAnimals;
+    });
+  };
+
   /*useEffect(() => {
     axios
       .post("https://petstore.swagger.io/v2/pet", {
@@ -66,6 +75,7 @@ const Animals = () => {
                   key={animal.id + index}
                   name={animal.name}
                   handleDelete={handleDelete}
+                  handleEdit={handleEdit}
                 ></Animal>
               );
             }

@@ -11,7 +11,7 @@ const Navbar = () => {
       <ul>
         <li>
           <NavLink
-            className={({ isActive }) => (isActive ? "active" : "")}
+            className={({ isActive }) => (isActive ? "active-link " : "")}
             to="/"
           >
             HOME
@@ -19,7 +19,7 @@ const Navbar = () => {
         </li>
         <li>
           <NavLink
-            className={({ isActive }) => (isActive ? "active" : "")}
+            className={({ isActive }) => (isActive ? "active-link " : "")}
             to="/gestione-animali"
           >
             GESTIONE ANIMALI
@@ -27,7 +27,7 @@ const Navbar = () => {
         </li>
         <li>
           <NavLink
-            className={({ isActive }) => (isActive ? "active" : "")}
+            className={({ isActive }) => (isActive ? "active-link " : "")}
             to="/inventario"
           >
             INVENTARIO

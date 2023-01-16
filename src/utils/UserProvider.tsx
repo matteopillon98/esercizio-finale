@@ -32,6 +32,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
     if (username === "admin" && password === "admin") {
       localStorage.setItem("username", username);
       setIsLogged(true);
+      setMessage("");
     } else {
       setMessage("Credenziali fornite errate, riprova");
     }
