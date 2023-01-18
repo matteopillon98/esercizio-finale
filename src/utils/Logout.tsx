@@ -51,7 +51,7 @@ const Logout = () => {
           <Button
             variant="outlined"
             endIcon={<UndoIcon />}
-            onClick={() => setOpen(false)}
+            onClick={handleClose}
             color="error"
           >
             Annulla

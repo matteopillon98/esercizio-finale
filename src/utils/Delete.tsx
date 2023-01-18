@@ -89,7 +89,7 @@ const Delete = (props: Props) => {
           <Button
             variant="outlined"
             endIcon={<UndoIcon />}
-            onClick={() => setOpen(false)}
+            onClick={handleClose}
             color="error"
           >
             Annulla

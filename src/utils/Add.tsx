@@ -35,7 +35,7 @@ const Add = (props: Props) => {
 
   const handleAddConfirm = () => {
     axios
-      .post("https://petstore.swagger.io/v2/pet", {
+      .post(baseURL, {
         id: Math.floor(Math.random() * (updatedName.length + 10) + 1),
         category: {
           id: 0,
