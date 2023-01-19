@@ -2,7 +2,7 @@ import { UserContext } from "../utils/UserProvider";
 import { useContext } from "react";
 import Alert from "@mui/material/Alert";
 
-const Home = () => {
+export default function Home () {
   const { message, setMessage } = useContext(UserContext);
   return (
     <div className="user-logged">
@@ -15,5 +15,3 @@ const Home = () => {
     </div>
   );
 };
-
-export default Home;

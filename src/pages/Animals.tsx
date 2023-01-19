@@ -27,7 +27,7 @@ interface Animal {
 
 const baseURL = "https://petstore.swagger.io/v2/pet/findByStatus?status=sold";
 
-const Animals = () => {
+export default function Animals () {
   const { message, setMessage } = useContext(UserContext);
   const [animals, setAnimals] = useState<Animal[]>([]);
   const [progress, setProgress] = useState(10);
@@ -119,4 +119,3 @@ const Animals = () => {
   );
 };
 
-export default Animals;

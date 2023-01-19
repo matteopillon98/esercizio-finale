@@ -14,7 +14,7 @@ interface Props {
   handleEdit: (id: string, name: string) => {};
 }
 
-const Animal = (props: Props) => {
+export default function Animal (props: Props)  {
   const { id, name, handleDelete, handleEdit } = props;
 
   return (
@@ -47,4 +47,3 @@ const Animal = (props: Props) => {
     </ListItem>
   );
 };
-export default Animal;

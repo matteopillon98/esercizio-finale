@@ -1,39 +1,44 @@
-import { useState, useContext } from "react";
-import reactLogo from "./assets/react.svg";
+import { useContext } from "react";
 import "./styles/App.css";
 import LoginForm from "./forms/LoginForm";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import { UserProvider, UserContext } from "./utils/UserProvider";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { UserContext } from "./utils/UserProvider";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Warehouse from "./pages/Warehouse";
 import Animals from "./pages/Animals";
 import PageNotFound from "./pages/PageNotFound";
 
-function App() {
+export default function App() {
   const { isLogged } = useContext(UserContext);
 
   return (
-    <BrowserRouter>
+    <>
       <Navbar />
       <div id="app" className="app">
-        <Routes>
-          <Route path="/" element={isLogged ? <Home /> : <LoginForm />}></Route>
-          <Route
-            path="/gestione-animali"
-            element={isLogged ? <Animals /> : <LoginForm />}
-          ></Route>
-          <Route
-            path="/inventario"
-            element={isLogged ? <Warehouse /> : <LoginForm />}
-          ></Route>
-          <Route path="/*" element={<PageNotFound />}></Route>
-        </Routes>
+          {isLogged ? <ItemsLogged/> : <ItemsNotLogged/>}
         <Footer />
       </div>
-    </BrowserRouter>
+    </>
   );
 }
 
-export default App;
+function ItemsLogged () {
+  return(
+    <Routes>
+    <Route path="/" element={<Home />}></Route>
+    <Route path="/gestione-animali" element={<Animals />}></Route>
+    <Route path="/inventario" element={<Warehouse />}></Route>
+    <Route path="/*" element={<PageNotFound />}></Route>
+    </Routes>
+  );
+}
+
+function ItemsNotLogged(){
+  return(
+    <Routes>
+    <Route path="*" element={<LoginForm />}></Route>
+    </Routes>
+  );
+}

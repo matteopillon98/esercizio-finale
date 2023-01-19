@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -21,7 +21,7 @@ interface Props {
 
 const baseURL = "https://petstore.swagger.io/v2/pet";
 
-const Edit = (props: Props) => {
+export default function Edit (props: Props) {
   const [open, setOpen] = useState(false);
   const [updatedName, setUpdatedName] = useState("");
   const { setMessage } = useContext(UserContext);
@@ -128,5 +128,3 @@ const Edit = (props: Props) => {
     </>
   );
 };
-
-export default Edit;

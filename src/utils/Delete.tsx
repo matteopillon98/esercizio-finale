@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -16,8 +16,7 @@ interface Props {
   id: string;
   handleDelete: (id: string) => {};
 }
-
-const Delete = (props: Props) => {
+export default function Delete (props: Props) {
   const { setMessage } = useContext(UserContext);
 
   const [open, setOpen] = useState(false);
@@ -107,5 +106,3 @@ const Delete = (props: Props) => {
     </>
   );
 };
-
-export default Delete;

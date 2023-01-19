@@ -1,42 +1,34 @@
-import React, { useContext } from "react";
+import { ComponentProps, useContext } from "react";
 import { UserContext } from "../utils/UserProvider";
 import { NavLink } from "react-router-dom";
 import Logout from "../utils/Logout";
 
-const Navbar = () => {
+export default function Navbar() {
   const { isLogged } = useContext(UserContext);
 
   return (
     <nav>
       <ul>
         <li>
-          <NavLink
-            className={({ isActive }) => (isActive ? "active-link " : "")}
-            to="/"
-          >
-            HOME
-          </NavLink>
+          <NavLinkItem to="/">HOME</NavLinkItem>
         </li>
         <li>
-          <NavLink
-            className={({ isActive }) => (isActive ? "active-link " : "")}
-            to="/gestione-animali"
-          >
-            GESTIONE ANIMALI
-          </NavLink>
+          <NavLinkItem to="/gestione-animali">GESTIONE ANIMALI</NavLinkItem>
         </li>
         <li>
-          <NavLink
-            className={({ isActive }) => (isActive ? "active-link " : "")}
-            to="/inventario"
-          >
-            INVENTARIO
-          </NavLink>
+          <NavLinkItem to="/inventario">INVENTARIO</NavLinkItem>
         </li>
       </ul>
       {isLogged && <Logout />}
     </nav>
   );
-};
+}
 
-export default Navbar;
+const NavLinkItem = ({ ...props }: ComponentProps<typeof NavLink>) => {
+  return (
+    <NavLink
+      {...props}
+      className={({ isActive }) => (isActive ? "active-link " : "")}
+    />
+  );
+};

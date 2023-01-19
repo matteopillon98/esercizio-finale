@@ -43,7 +43,7 @@ const backgroundColor = ["rgba(252, 0, 255, 0.7)"];
 
 const baseURL = "https://petstore.swagger.io/v2/store/inventory";
 
-const Warehouse = () => {
+export default function Warehouse () {
   const [warehouse, setWarehouse] = useState([]);
 
   useEffect(() => {
@@ -81,4 +81,3 @@ const Warehouse = () => {
   );
 };
 
-export default Warehouse;
