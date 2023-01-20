@@ -3,7 +3,6 @@ import axios from "axios";
 import List from "@mui/material/List";
 import Animal from "./Animal";
 import { useUser } from "../utils/UserProvider";
-import { useContext } from "react";
 import Add from "../utils/Add";
 import Alert from "@mui/material/Alert";
 
@@ -83,9 +82,7 @@ export default function Animals () {
   return (
     <div className="user-logged">
       <h2>Gestione animali</h2>
-
-      <Add handleAdd={() => handleAdd} />
-
+      <Add handleAdd={handleAdd} />
       {message && (
         <Alert severity="info" onClose={() => setMessage("")}>
           {message}
@@ -93,29 +90,41 @@ export default function Animals () {
       )}
 
       {progress !== 100 ? (
-        <Box sx={{ width: "100%" }}>
-          <p>Sto caricando i dati relativi agli animali ... </p>
-          <LinearProgress variant="determinate" value={progress} />
-        </Box>
-      ) : (
-        <List>
-          {animals &&
-            animals.map((animal, index) => {
-              if (animal.name && animal.id < "10000") {
-                return (
-                  <Animal
-                    id={animal.id}
-                    key={animal.id + index}
-                    name={animal.name}
-                    handleDelete={() => handleDelete}
-                    handleEdit={() => handleEdit}
-                  ></Animal>
-                );
-              }
-            })}
-        </List>
+        <ProgressItem progress={progress}/>) : (
+        <AnimalList animals={animals} handleDelete={handleDelete} handleEdit={handleEdit}/>
       )}
     </div>
   );
 };
 
+const ProgressItem = (props) => {
+  const {progress} = props;
+  return (
+    <Box sx={{ width: "100%" }}>
+          <p>Sto caricando i dati relativi agli animali ... </p>
+          <LinearProgress variant="determinate" value={progress} />
+        </Box>
+  );
+}
+
+const AnimalList = (props) => {
+  const {animals, handleDelete, handleEdit} = props;
+  return (
+    <List>
+      {animals &&
+        animals.map((animal, index) => {
+          if (animal.name && animal.id < "10000") {
+            return (
+              <Animal
+                id={animal.id}
+                key={animal.id + index}
+                name={animal.name}
+                handleDelete={handleDelete}
+                handleEdit={handleEdit}
+              ></Animal>
+            );
+          }
+        })}
+    </List>
+  );
+}
