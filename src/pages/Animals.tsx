@@ -26,7 +26,7 @@ interface Animal {
 
 const baseURL = "https://petstore.swagger.io/v2/pet/findByStatus?status=sold";
 
-export default function Animals () {
+export default function Animals() {
   const { message, setMessage } = useUser();
   const [animals, setAnimals] = useState<Animal[]>([]);
   const [progress, setProgress] = useState(10);
@@ -90,25 +90,30 @@ export default function Animals () {
       )}
 
       {progress !== 100 ? (
-        <ProgressItem progress={progress}/>) : (
-        <AnimalList animals={animals} handleDelete={handleDelete} handleEdit={handleEdit}/>
+        <ProgressItem progress={progress} />
+      ) : (
+        <AnimalList
+          animals={animals}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+        />
       )}
     </div>
   );
-};
-
-const ProgressItem = (props) => {
-  const {progress} = props;
-  return (
-    <Box sx={{ width: "100%" }}>
-          <p>Sto caricando i dati relativi agli animali ... </p>
-          <LinearProgress variant="determinate" value={progress} />
-        </Box>
-  );
 }
 
+const ProgressItem = (props) => {
+  const { progress } = props;
+  return (
+    <Box sx={{ width: "100%" }}>
+      <p>Sto caricando i dati relativi agli animali ... </p>
+      <LinearProgress variant="determinate" value={progress} />
+    </Box>
+  );
+};
+
 const AnimalList = (props) => {
-  const {animals, handleDelete, handleEdit} = props;
+  const { animals, handleDelete, handleEdit } = props;
   return (
     <List>
       {animals &&
@@ -127,4 +132,4 @@ const AnimalList = (props) => {
         })}
     </List>
   );
-}
+};

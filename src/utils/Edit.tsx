@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, ChangeEvent } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -21,9 +21,9 @@ interface Props {
 
 const baseURL = "https://petstore.swagger.io/v2/pet";
 
-export default function Edit (props: Props) {
+export default function Edit(props: Props) {
   const [open, setOpen] = useState(false);
-  const [updatedName, setUpdatedName] = useState("");
+  const [updatedName, handleUpdatedName] = useInput("");
   const { setMessage } = useUser();
 
   const { id, name, handleEdit } = props;
@@ -104,7 +104,7 @@ export default function Edit (props: Props) {
             type="text"
             fullWidth
             variant="standard"
-            onChange={(e) => setUpdatedName(e.target.value)}
+            onChange={handleUpdatedName}
           />
         </DialogContent>
         <DialogActions>
@@ -127,4 +127,13 @@ export default function Edit (props: Props) {
       </Dialog>
     </>
   );
-};
+}
+
+function useInput(
+  defaultValue: string
+): [string, (e: ChangeEvent<HTMLInputElement>) => void] {
+  const [value, setValue] = useState(defaultValue);
+  const onChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setValue(e.target.value);
+  return [value, onChange];
+}

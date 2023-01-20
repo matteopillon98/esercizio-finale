@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, ChangeEvent } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -18,9 +18,9 @@ interface Props {
 
 const baseURL = "https://petstore.swagger.io/v2/pet";
 
-export default function Add (props: Props) {
+export default function Add(props: Props) {
   const [open, setOpen] = useState(false);
-  const [updatedName, setUpdatedName] = useState("");
+  const [name, handleName] = useInput("");
   const { setMessage } = useUser();
 
   const { handleAdd } = props;
@@ -36,12 +36,12 @@ export default function Add (props: Props) {
   const handleAddConfirm = () => {
     axios
       .post(baseURL, {
-        id: Math.floor(Math.random() * (updatedName.length + 10) + 1),
+        id: Math.floor(Math.random() * (name.length + 10) + 1),
         category: {
           id: 0,
           name: "string",
         },
-        name: updatedName,
+        name: name,
         photoUrls: ["string"],
         tags: [
           {
@@ -102,7 +102,7 @@ export default function Add (props: Props) {
             type="text"
             fullWidth
             variant="standard"
-            onChange={(e) => setUpdatedName(e.target.value)}
+            onChange={handleName}
           />
         </DialogContent>
         <DialogActions>
@@ -125,4 +125,13 @@ export default function Add (props: Props) {
       </Dialog>
     </div>
   );
-};
+}
+
+function useInput(
+  defaultValue: string
+): [string, (e: ChangeEvent<HTMLInputElement>) => void] {
+  const [value, setValue] = useState(defaultValue);
+  const onChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setValue(e.target.value);
+  return [value, onChange];
+}
