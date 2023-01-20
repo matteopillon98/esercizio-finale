@@ -1,5 +1,5 @@
 import { useContext, useReducer, useState, ChangeEvent } from "react";
-import { UserContext } from "../utils/UserProvider";
+import { useUser } from "../utils/UserProvider";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
@@ -14,7 +14,7 @@ import FormControl from "@mui/material/FormControl";
 import { InputLabel } from "@mui/material";
 
 export default function LoginForm() {
-  const { login, message } = useContext(UserContext);
+  const { login, message } = useUser();
 
   const [user, handleUserChange] = useInput("");
   const [password, handlePasswordChange] = useInput("");

@@ -3,7 +3,7 @@ import "./styles/App.css";
 import LoginForm from "./forms/LoginForm";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import { UserContext } from "./utils/UserProvider";
+import { useUser } from "./utils/UserProvider";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Warehouse from "./pages/Warehouse";
@@ -11,7 +11,7 @@ import Animals from "./pages/Animals";
 import PageNotFound from "./pages/PageNotFound";
 
 export default function App() {
-  const { isLogged } = useContext(UserContext);
+  const { isLogged } = useUser();
 
   return (
     <>

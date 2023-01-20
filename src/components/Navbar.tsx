@@ -1,10 +1,10 @@
 import { ComponentProps, useContext } from "react";
-import { UserContext } from "../utils/UserProvider";
+import { useUser } from "../utils/UserProvider";
 import { NavLink } from "react-router-dom";
 import Logout from "../utils/Logout";
 
 export default function Navbar() {
-  const { isLogged } = useContext(UserContext);
+  const { isLogged } = useUser();
 
   return (
     <nav>

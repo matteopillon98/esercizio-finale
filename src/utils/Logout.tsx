@@ -4,15 +4,15 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useContext, useState } from "react";
-import { UserContext } from "./UserProvider";
+import { useState } from "react";
+import { useUser } from "./UserProvider";
 import LogoutIcon from "@mui/icons-material/Logout";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import UndoIcon from "@mui/icons-material/Undo";
 
 export default function Logout () {
   const [open, setOpen] = useState(false);
-  const { logout } = useContext(UserContext);
+  const { logout } = useUser();
 
   const handleClickOpen = () => {
     setOpen(true);

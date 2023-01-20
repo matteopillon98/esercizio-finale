@@ -8,7 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import axios from "axios";
-import { UserContext } from "./UserProvider";
+import { useUser } from "./UserProvider";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import UndoIcon from "@mui/icons-material/Undo";
 
@@ -17,7 +17,7 @@ interface Props {
   handleDelete: (id: string) => {};
 }
 export default function Delete (props: Props) {
-  const { setMessage } = useContext(UserContext);
+  const { setMessage } = useUser();
 
   const [open, setOpen] = useState(false);
   const { id, handleDelete } = props;

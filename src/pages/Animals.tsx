@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import List from "@mui/material/List";
 import Animal from "./Animal";
-import { UserContext } from "../utils/UserProvider";
+import { useUser } from "../utils/UserProvider";
 import { useContext } from "react";
 import Add from "../utils/Add";
 import Alert from "@mui/material/Alert";
@@ -28,7 +28,7 @@ interface Animal {
 const baseURL = "https://petstore.swagger.io/v2/pet/findByStatus?status=sold";
 
 export default function Animals () {
-  const { message, setMessage } = useContext(UserContext);
+  const { message, setMessage } = useUser();
   const [animals, setAnimals] = useState<Animal[]>([]);
   const [progress, setProgress] = useState(10);
 

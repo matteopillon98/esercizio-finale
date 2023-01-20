@@ -11,7 +11,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import UndoIcon from "@mui/icons-material/Undo";
-import { UserContext } from "./UserProvider";
+import { useUser } from "./UserProvider";
 
 interface Props {
   id: string;
@@ -24,7 +24,7 @@ const baseURL = "https://petstore.swagger.io/v2/pet";
 export default function Edit (props: Props) {
   const [open, setOpen] = useState(false);
   const [updatedName, setUpdatedName] = useState("");
-  const { setMessage } = useContext(UserContext);
+  const { setMessage } = useUser();
 
   const { id, name, handleEdit } = props;
 

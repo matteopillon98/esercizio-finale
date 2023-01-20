@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useContext } from "react";
 
 interface UserContextProps {
   login: (username: string, password: string) => void;
@@ -8,6 +8,8 @@ interface UserContextProps {
   setMessage: (msg: string) => void;
 }
 
+export { useUser, UserProvider };
+
 const UserContext = createContext<UserContextProps>({
   login: () => {},
   logout: () => {},
@@ -15,6 +17,9 @@ const UserContext = createContext<UserContextProps>({
   message: "",
   setMessage: () => {},
 });
+
+const useUser = () => { return useContext(UserContext)};
+
 
 interface UserProviderProps {
   children: React.ReactNode;
@@ -58,5 +63,3 @@ const UserProvider = ({ children }: UserProviderProps) => {
     </UserContext.Provider>
   );
 };
-
-export { UserContext, UserProvider };

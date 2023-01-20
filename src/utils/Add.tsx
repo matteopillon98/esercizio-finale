@@ -10,7 +10,7 @@ import axios from "axios";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import UndoIcon from "@mui/icons-material/Undo";
-import { UserContext } from "./UserProvider";
+import { useUser } from "./UserProvider";
 
 interface Props {
   handleAdd: () => {};
@@ -21,7 +21,7 @@ const baseURL = "https://petstore.swagger.io/v2/pet";
 export default function Add (props: Props) {
   const [open, setOpen] = useState(false);
   const [updatedName, setUpdatedName] = useState("");
-  const { setMessage } = useContext(UserContext);
+  const { setMessage } = useUser();
 
   const { handleAdd } = props;
 
